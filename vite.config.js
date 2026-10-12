@@ -1,0 +1,26 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+const API_TARGET = process.env.VITE_API_TARGET || 'http://localhost:5000';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': { target: API_TARGET, changeOrigin: true },
+      '/uploads': { target: API_TARGET, changeOrigin: true },
+    },
+  },
+  build: {
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          motion: ['framer-motion'],
+        },
+      },
+    },
+  },
+});
