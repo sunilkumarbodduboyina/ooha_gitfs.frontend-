@@ -1,0 +1,36 @@
+import{j as e}from"./motion-DNXJu9Nj.js";import{u as v,b as j,r,N as k,L as m,g as N,O as C}from"./vendor-BbFw_AZd.js";import{c as i,g as S,d as w,f as L,S as A,M as O,X as P}from"./index-BkgjawEX.js";import{P as M}from"./package-DoT_kEVj.js";import{F as V}from"./folder-tree-CInBYSol.js";import{L as z}from"./layers-CwGnhPUz.js";import{S as q}from"./shopping-cart-CfeQgFky.js";import{U as B}from"./users-Bwebz2HN.js";import{C as E}from"./credit-card-ChN-CGZU.js";import{C as I}from"./chart-column-ClEjkwuv.js";import{I as W}from"./image-DItR3M3E.js";import{V as D}from"./video-CL3l4vpw.js";import{B as R}from"./badge-percent-C0nNzgvM.js";/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const U=i("Bell",[["path",{d:"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9",key:"1qo2s2"}],["path",{d:"M10.3 21a1.94 1.94 0 0 0 3.4 0",key:"qgo35s"}]]);/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const T=i("CircleUser",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["circle",{cx:"12",cy:"10",r:"3",key:"ilqhr7"}],["path",{d:"M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662",key:"154egf"}]]);/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const F=i("LayoutDashboard",[["rect",{width:"7",height:"9",x:"3",y:"3",rx:"1",key:"10lvy0"}],["rect",{width:"7",height:"5",x:"14",y:"3",rx:"1",key:"16une8"}],["rect",{width:"7",height:"9",x:"14",y:"12",rx:"1",key:"1hutg5"}],["rect",{width:"7",height:"5",x:"3",y:"16",rx:"1",key:"ldoo1y"}]]);/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const H=i("LogOut",[["path",{d:"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4",key:"1uf3rs"}],["polyline",{points:"16 17 21 12 16 7",key:"1gabdz"}],["line",{x1:"21",x2:"9",y1:"12",y2:"12",key:"1uyos4"}]]);/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const _=i("Menu",[["line",{x1:"4",x2:"20",y1:"12",y2:"12",key:"1e0a9i"}],["line",{x1:"4",x2:"20",y1:"6",y2:"6",key:"1owob3"}],["line",{x1:"4",x2:"20",y1:"18",y2:"18",key:"yk5zj1"}]]);/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const $=i("Settings",[["path",{d:"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z",key:"1qme2f"}],["circle",{cx:"12",cy:"12",r:"3",key:"1v7zrd"}]]);/**
+ * @license lucide-react v0.454.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const G=i("SquarePlus",[["rect",{width:"18",height:"18",x:"3",y:"3",rx:"2",key:"afitv7"}],["path",{d:"M8 12h8",key:"1wcyev"}],["path",{d:"M12 8v8",key:"napkw2"}]]),X=[{to:"/admin",icon:F,label:"Dashboard",end:!0},{section:"Catalogue"},{to:"/admin/products",icon:M,label:"Products"},{to:"/admin/products/new",icon:G,label:"Add Product"},{to:"/admin/categories",icon:V,label:"Categories"},{to:"/admin/collections",icon:z,label:"Collections"},{section:"Sales"},{to:"/admin/orders",icon:q,label:"Orders"},{to:"/admin/customers",icon:B,label:"Customers"},{to:"/admin/reviews",icon:A,label:"Reviews"},{to:"/admin/payments",icon:E,label:"Payments"},{to:"/admin/reports",icon:I,label:"Reports"},{section:"Content"},{to:"/admin/banners",icon:W,label:"Banners"},{to:"/admin/videos",icon:D,label:"Videos"},{to:"/admin/offers",icon:R,label:"Offers"},{section:"Store"},{to:"/admin/settings",icon:$,label:"Website Settings"},{to:"/admin/whatsapp",icon:O,label:"WhatsApp Settings"},{to:"/admin/profile",icon:T,label:"Admin Profile"}],J={"/admin":"Dashboard","/admin/products":"Products","/admin/products/new":"Add Product","/admin/categories":"Categories","/admin/collections":"Collections","/admin/orders":"Orders","/admin/customers":"Customers","/admin/reviews":"Reviews","/admin/banners":"Banners","/admin/reports":"Reports & Analytics","/admin/videos":"Videos","/admin/offers":"Offers & Coupons","/admin/payments":"Payments","/admin/settings":"Website Settings","/admin/whatsapp":"WhatsApp Settings","/admin/profile":"Admin Profile"};function de(){const{user:s,loading:p,logout:h}=S(),u=v(),n=j(),[l,d]=r.useState(!1),[t,x]=r.useState(null);if(r.useEffect(()=>{(s==null?void 0:s.role)==="admin"&&w.dashboard().then(a=>x(a.stats)).catch(()=>{})},[s]),r.useEffect(()=>{d(!1)},[n.pathname]),p)return e.jsx(L,{label:"Verifying admin session…"});if(!s||s.role!=="admin")return e.jsx(k,{to:"/admin/login",replace:!0});const y=J[n.pathname]||(n.pathname.startsWith("/admin/orders")?"Order Details":n.pathname.startsWith("/admin/products/")?"Edit Product":"Admin"),o=t==null?void 0:t.pending_reviews,c=t==null?void 0:t.pending_orders,g=()=>{h(),u("/admin/login")};return e.jsxs("div",{className:"admin-shell",children:[e.jsxs("aside",{className:`admin-side ${l?"open":""}`,children:[e.jsxs(m,{to:"/",className:"brand",children:["OOHA ",e.jsx("em",{children:"GIFTS"})]}),e.jsx("nav",{className:"as-nav",children:X.map((a,b)=>a.section?e.jsx("div",{className:"as-label",children:a.section},`s${b}`):e.jsxs(N,{to:a.to,end:a.end,className:({isActive:f})=>`as-link ${f?"active":""}`,children:[e.jsx(a.icon,{size:17}),a.label,a.to==="/admin/orders"&&c>0&&e.jsx("span",{className:"badge-dot",children:c}),a.to==="/admin/reviews"&&o>0&&e.jsx("span",{className:"badge-dot",children:o})]},a.to))}),e.jsx("div",{className:"as-foot",children:e.jsxs("button",{className:"as-link",style:{width:"100%"},onClick:g,children:[e.jsx(H,{size:17})," Logout"]})})]}),l&&e.jsx("div",{className:"sidebar-backdrop",style:{zIndex:110},onClick:()=>d(!1)}),e.jsxs("div",{className:"admin-main",children:[e.jsxs("div",{className:"admin-top",children:[e.jsx("button",{className:"icon-btn admin-burger",onClick:()=>d(!0),"aria-label":"Open menu",children:l?e.jsx(P,{size:20}):e.jsx(_,{size:20})}),e.jsx("h1",{children:y}),e.jsx("span",{className:"spacer"}),e.jsx(m,{to:"/",className:"btn btn-outline btn-sm",target:"_blank",children:"View store"}),e.jsxs("button",{className:"icon-btn","aria-label":"Notifications",children:[e.jsx(U,{size:19}),o>0&&e.jsx("span",{className:"cart-count",children:o})]}),e.jsx("div",{className:"admin-avatar",title:s.name,children:String(s.name||"A").charAt(0).toUpperCase()})]}),e.jsx("div",{className:"admin-body",children:e.jsx(C,{})})]})]})}export{de as default};
