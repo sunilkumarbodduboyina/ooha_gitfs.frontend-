@@ -1,21 +1,39 @@
 # Dependencies
 node_modules/
+.pnp
+.pnp.js
 
-# Build output
+# Testing and build output
+coverage/
 dist/
 build/
+.next/
+out/
 
 # Environment files (never commit secrets)
 .env
 .env.*
 !.env.example
 
-# Backups & logs
+# Backups and logs
 *.bak
 *.backup
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# OS / editor
+# OS and editor
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Deployment and build metadata
+.vercel/
+*.tsbuildinfo
+.turbo/
