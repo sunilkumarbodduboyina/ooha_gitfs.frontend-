@@ -34,9 +34,50 @@ const isLocal = /^(localhost|127\.0\.0\.1|::1)$/i.test(host);
 
 /* TLS is the norm for managed MySQL (Aiven, PlanetScale, Railway…).
    Default: on for remote hosts, off locally. Override with DB_SSL=true/false. */
-const ssl = process.env.DB_SSL
+const wantsSsl = process.env.DB_SSL
   ? String(process.env.DB_SSL).toLowerCase() !== 'false'
   : !isLocal;
+
+/**
+ * mysql2 requires `ssl` to be an OBJECT (or a named profile) — passing a
+ * boolean makes createPool() throw "SSL profile must be an object", which would
+ * crash the API at boot. TLS therefore always resolves to `false` or an object.
+ *
+ * Managed providers usually present a private CA that Node does not trust, so
+ * certificate verification is off by default (the connection is still
+ * encrypted). Harden it with either/both:
+ *   DB_SSL_CA=<PEM text, or a path to a .pem file>
+ *   DB_SSL_REJECT_UNAUTHORIZED=true
+ */
+function sslOptions() {
+  if (!wantsSsl) return false;
+
+  const opts = {
+    rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED
+      ? String(process.env.DB_SSL_REJECT_UNAUTHORIZED).toLowerCase() !== 'false'
+      : false,
+  };
+
+  const ca = process.env.DB_SSL_CA;
+  if (ca) {
+    try {
+      /* Accept either the PEM itself or a path to a PEM file. */
+      opts.ca = ca.includes('BEGIN CERTIFICATE')
+        ? ca
+        : require('fs').readFileSync(ca, 'utf8');
+      /* Trusting an explicit CA implies verification unless told otherwise. */
+      if (process.env.DB_SSL_REJECT_UNAUTHORIZED === undefined) {
+        opts.rejectUnauthorized = true;
+      }
+    } catch (error) {
+      /* A missing CA file must not crash the API; fall back to no CA pinning. */
+      console.error('Ignoring DB_SSL_CA:', error.message);
+      delete opts.ca;
+    }
+  }
+
+  return opts;
+}
 
 const pool = mysql.createPool({
   host,
@@ -53,7 +94,7 @@ const pool = mysql.createPool({
      them alive and fail fast-and-loudly instead of hanging the API. */
   connectTimeout: 15000,
   enableKeepAlive: true,
-  ssl,
+  ssl: sslOptions(),
 });
 
 /** Run a query using the pool. */

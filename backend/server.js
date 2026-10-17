@@ -133,12 +133,19 @@ app.get('/api/health', async (req, res) => {
       time: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('Health check failed:', error.message);
+    console.error('Health check failed:', error.code || '', error.message);
     return res.status(503).json({
       success: false,
       service: 'Ooha Gifts API',
       db: 'down',
       message: 'Database health check failed',
+      /* Diagnostic only: an error code and *booleans* showing which config
+         source is present. No host, user, password or URL is ever returned. */
+      code: error.code || null,
+      config: {
+        databaseUrl: Boolean(process.env.DATABASE_URL),
+        dbHost: Boolean(process.env.DB_HOST),
+      },
       time: new Date().toISOString(),
     });
   }
