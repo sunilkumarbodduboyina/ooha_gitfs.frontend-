@@ -15,6 +15,10 @@ out/
 .env.*
 !.env.example
 
+# Production frontend build config — contains only the public API URL (no secrets),
+# so it can be committed to make Vercel/Render builds reproducible.
+!frontend/.env.production
+
 # Backups and logs
 *.bak
 *.backup
