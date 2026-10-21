@@ -9,6 +9,7 @@ import './styles/base.css';
 import './styles/layout.css';
 import './styles/shop.css';
 import './styles/pages.css';
+import './styles/intro.css';
 import './styles/admin.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -16,6 +16,7 @@ import BudgetSection from '../../components/home/BudgetSection';
 import RelationshipGrid from '../../components/home/RelationshipGrid';
 import OccasionGrid from '../../components/home/OccasionGrid';
 import CollectionStrip from '../../components/home/CollectionStrip';
+import IntroFlip from '../../components/home/IntroFlip';
 
 /* Below-the-fold sections are code-split so the first paint stays fast. */
 const LoveLab = lazy(() => import('../../components/home/LoveLab'));
@@ -72,6 +73,9 @@ export default function Home() {
       <TrustBar stats={stats} settings={settings} />
 
       <MarqueeBar />
+
+      {/* Intro — flip cards that point visitors into the store */}
+      <IntroFlip />
 
       {/* Friendly error state if the store payload can't be fetched */}
       {error && (

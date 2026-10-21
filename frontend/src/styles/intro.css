@@ -1,0 +1,190 @@
+/* ============================================================
+   Homepage intro — flip cards ("Every gift has a story")
+   ============================================================ */
+
+.intro-flip {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(217, 164, 65, 0.16), transparent 42%),
+    radial-gradient(circle at 88% 100%, rgba(178, 58, 94, 0.12), transparent 45%),
+    linear-gradient(180deg, var(--cream) 0%, var(--blush) 100%);
+}
+
+.intro-head {
+  max-width: 760px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.intro-head .section-title {
+  margin-top: 6px;
+}
+
+.intro-accent {
+  background: var(--grad-rose);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro-head .section-sub {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- grid ---------- */
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* ---------- card ---------- */
+.flip-card {
+  position: relative;
+  height: 232px;
+  perspective: 1200px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s var(--ease);
+}
+
+.flip-card:hover .flip-inner,
+.flip-card:focus-within .flip-inner,
+.flip-card.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 26px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* front */
+.flip-front {
+  background: var(--paper);
+}
+
+.flip-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 82% 8%, rgba(217, 164, 65, 0.22), transparent 58%);
+  pointer-events: none;
+}
+
+.flip-emoji {
+  font-size: 2.15rem;
+  line-height: 1;
+  filter: drop-shadow(0 8px 14px rgba(44, 33, 38, 0.14));
+}
+
+.flip-front h3 {
+  font-size: 1.06rem;
+}
+
+.flip-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.9;
+}
+
+/* back */
+.flip-back {
+  transform: rotateY(180deg);
+  background: var(--grad-rose);
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+  color: #fff;
+}
+
+.flip-back h4 {
+  font-size: 1.04rem;
+  color: #fff;
+}
+
+.flip-back p {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.flip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.flip-link:hover,
+.flip-link:focus-visible {
+  background: #fff;
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Touch devices have no hover — only the tap toggle should flip a card. */
+@media (hover: none) {
+  .flip-card:hover .flip-inner {
+    transform: none;
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .flip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .flip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card {
+    height: 214px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner {
+    transition: none;
+  }
+}
