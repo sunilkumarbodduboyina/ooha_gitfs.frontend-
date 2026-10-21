@@ -9,7 +9,8 @@
     "dev": "node server.js",
     "test": "node --test",
     "setup": "node setup/init.js",
-    "seed": "node setup/init.js"
+    "seed": "node setup/init.js",
+    "seed:products": "node setup/add-products.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

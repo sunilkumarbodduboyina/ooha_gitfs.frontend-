@@ -2,7 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUT = path.join(__dirname, '..', '..', 'frontend', 'public', 'images');
+/* core.js lives at backend/setup/assets/, so the repo root is three levels up.
+   (This used to be two levels — a stale path from when the script sat at the
+   repo root, which silently wrote artwork into backend/frontend/.) */
+const OUT = path.join(__dirname, '..', '..', '..', 'frontend', 'public', 'images');
 
 function write(rel, content) {
   const file = path.join(OUT, rel);
