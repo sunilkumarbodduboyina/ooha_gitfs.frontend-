@@ -284,12 +284,19 @@ CREATE TABLE IF NOT EXISTS whatsapp_settings (
 
 async function seed() {
   /* ---------------- admins & demo user ---------------- */
-  const adminPass = await bcrypt.hash('admin123', 10);
+  const configuredAdminEmail = process.env.ADMIN_EMAIL;
+  const configuredAdminPassword = process.env.ADMIN_PASSWORD;
+  if (Boolean(configuredAdminEmail) !== Boolean(configuredAdminPassword)) {
+    throw new Error('Set both ADMIN_EMAIL and ADMIN_PASSWORD to configure the admin account');
+  }
+  const adminEmail = String(configuredAdminEmail || 'admin@oohagifts.com').trim().toLowerCase();
+  const adminPassword = configuredAdminPassword || 'admin123';
+  const adminPass = await bcrypt.hash(adminPassword, 10);
   const userPass = await bcrypt.hash('demo123', 10);
 
   const adminId = await insert('admins', {
-    name: 'Ooha Admin',
-    email: 'admin@oohagifts.com',
+    name: process.env.ADMIN_NAME || 'Ooha Admin',
+    email: adminEmail,
     phone: '9876543210',
     password: adminPass,
     role: 'superadmin',

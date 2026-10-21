@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, KeyRound, Lock, Mail, LogIn, ShieldCheck, Package, Star } from 'lucide-react';
+import { Eye, EyeOff, KeyRound, Mail, LogIn, ShieldCheck, Package, Star } from 'lucide-react';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -76,7 +76,7 @@ export default function AdminLogin() {
                   className="input"
                   style={{ paddingLeft: 44 }}
                   type="email"
-                  placeholder="admin@oohagifts.com"
+                  placeholder="Enter Admin email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   autoComplete="username"
@@ -112,10 +112,6 @@ export default function AdminLogin() {
               {busy ? 'Signing in…' : <><LogIn size={18} /> Login to dashboard</>}
             </button>
           </form>
-
-          <div className="demo-chip">
-            <Lock size={12} style={{ verticalAlign: -2 }} /> Demo admin → <strong>admin@oohagifts.com</strong> / <strong>admin123</strong>
-          </div>
         </motion.div>
       </div>
     </div>
