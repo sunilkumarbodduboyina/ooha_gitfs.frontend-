@@ -94,7 +94,10 @@ function crud(table, publicFields) {
   const fields = publicFields.join(', ');
 
   const list = asyncHandler(async (req, res) => {
-    const rows = await query(`SELECT ${fields} FROM ${table} ORDER BY id DESC`);
+    /* `id` must be part of the payload: the admin UI uses it as the React key
+       and to address edit / delete / toggle requests. Selecting only the
+       whitelisted public fields silently dropped it. */
+    const rows = await query(`SELECT id, ${fields} FROM ${table} ORDER BY id DESC`);
     res.json({ success: true, [table]: rows });
   });
 
