@@ -1,14 +1,18 @@
 
-const GROWw_BASE_URL = "https://api.groww.in/v1";
+const GROWW_BASE_URL = "https://api.groww.in/v1";
 
 async function growwRequest(endpoint) {
+  if (typeof endpoint !== "string" || !endpoint.startsWith("/")) {
+    throw new Error("Groww API endpoint must be a valid path starting with '/'");
+  }
+
   const token = process.env.GROWW_ACCESS_TOKEN;
 
   if (!token) {
     throw new Error("Groww access token is not configured");
   }
 
-  const response = await fetch(`${GROWw_BASE_URL}${endpoint}`, {
+  const response = await fetch(`${GROWW_BASE_URL}${endpoint}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -17,16 +21,35 @@ async function growwRequest(endpoint) {
     },
   });
 
-  const data = await response.json();
+  let data;
+  const contentType = response.headers.get("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    try {
+      data = await response.json();
+    } catch (error) {
+      data = null;
+    }
+  } else {
+    const text = await response.text();
+    data = text ? text : null;
+  }
 
   if (!response.ok) {
-    const error = new Error("Groww API request failed");
+    const message =
+      (data && typeof data === "object" && (data.message || data.error)) ||
+      `Groww API request failed with status ${response.status}`;
+
+    const error = new Error(message);
     error.status = response.status;
+    error.details = data;
     throw error;
   }
 
   return data;
 }
+
+exports.growwRequest = growwRequest;
 
 exports.getProfile = async (req, res, next) => {
   try {
