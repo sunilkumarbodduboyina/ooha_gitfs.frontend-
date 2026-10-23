@@ -719,7 +719,10 @@ async function seed() {
     });
   }
 
-  console.log('✓ Seeded admin  : admin@oohagifts.com / admin123');
+  console.log('✓ Seeded admin  : ' + adminEmail);
+  if (!configuredAdminPassword) {
+    console.log('  Demo password : admin123 (change it in production)');
+  }
   console.log('✓ Seeded customer: demo@oohagifts.com / demo123');
 }
 
