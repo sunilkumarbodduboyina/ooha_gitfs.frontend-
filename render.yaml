@@ -1,0 +1,62 @@
+# Render Blueprint for the Ooha Gifts API (Express + MySQL).
+# Deploy from the Render dashboard: New + -> Blueprint -> select this repo.
+# Values marked `sync: false` are secrets/prompts and must be filled in Render.
+services:
+  - type: web
+    name: ooha-gifts-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    region: singapore
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+
+      # CORS: allow the deployed storefront (add custom domains, comma-separated).
+      - key: CORS_ORIGIN
+        value: https://ooha-gitfs-frontend.vercel.app
+      - key: FRONTEND_URL
+        value: https://ooha-gitfs-frontend.vercel.app
+
+      # MySQL (works with discrete DB_* vars or a single DATABASE_URL).
+      # DB_* wins when both are present, see backend/config/db.js.
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: ooha_gifts
+      # Auto-enabled for non-localhost hosts; set to "false" to disable.
+      - key: DB_SSL
+        value: "true"
+
+      # Auth / API secrets
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES
+        value: 7d
+
+      # Optional integrations: leave blank to run without them
+      # (payments fall back to simulated test mode).
+      - key: RAZORPAY_KEY_ID
+        value: ""
+      - key: RAZORPAY_KEY_SECRET
+        value: ""
+      - key: RESEND_API_KEY
+        value: ""
+      - key: EMAIL_FROM
+        value: ""
+      - key: WHATSAPP_NUMBER
+        value: ""
+      - key: GROQ_API_KEY
+        value: ""
+      - key: GROWW_ACCESS_TOKEN
+        value: ""
