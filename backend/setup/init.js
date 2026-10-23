@@ -11,7 +11,25 @@ const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-const DB_NAME = process.env.DB_NAME || 'ooha_gifts';
+/* Accept either discrete DB_* variables or a single DATABASE_URL, matching
+   backend/config/db.js, so seeding a hosted MySQL works the same way. */
+function fromUrl(url) {
+  try {
+    const u = new URL(url);
+    return {
+      host: u.hostname,
+      port: u.port ? Number(u.port) : 3306,
+      user: decodeURIComponent(u.username || ''),
+      password: decodeURIComponent(u.password || ''),
+      database: decodeURIComponent((u.pathname || '/').replace(/^\//, '')) || undefined,
+    };
+  } catch {
+    return {};
+  }
+}
+
+const urlOpts = process.env.DATABASE_URL ? fromUrl(process.env.DATABASE_URL) : {};
+const DB_NAME = process.env.DB_NAME || urlOpts.database || 'ooha_gifts';
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -716,17 +734,35 @@ function slugify(s) {
 
 (async function main() {
   try {
+    const host = process.env.DB_HOST || urlOpts.host || 'localhost';
+    const isLocal = /^(localhost|127\.0\.0\.1|::1)$/i.test(host);
+    const useSsl = process.env.DB_SSL
+      ? String(process.env.DB_SSL).toLowerCase() !== 'false'
+      : !isLocal;
+
     conn = await mysql.createConnection({
-      host: process.env.DB_HOST || 'localhost',
-      port: Number(process.env.DB_PORT) || 3306,
-      user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || '',
+      host,
+      port: Number(process.env.DB_PORT) || urlOpts.port || 3306,
+      user: process.env.DB_USER || urlOpts.user || 'root',
+      password: process.env.DB_PASSWORD || urlOpts.password || '',
+      ssl: useSsl
+        ? {
+            rejectUnauthorized:
+              String(process.env.DB_SSL_REJECT_UNAUTHORIZED || '').toLowerCase() === 'true',
+          }
+        : undefined,
       multipleStatements: true,
       charset: 'utf8mb4',
     });
 
     console.log('→ Connected to MySQL. Initialising database "' + DB_NAME + '" ...');
-    await exec(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
+    try {
+      await exec(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
+    } catch (err) {
+      /* Managed MySQL plans often pre-create the database and deny CREATE. */
+      if (err.code !== 'ER_DBACCESS_DENIED_ERROR') throw err;
+      console.log('! No permission to create databases — using the existing "' + DB_NAME + '" database.');
+    }
     await exec(`USE \`${DB_NAME}\`;`);
     await exec(SCHEMA);
     console.log('✓ Schema created (' + SCHEMA.split('CREATE TABLE').length + ' tables)');
