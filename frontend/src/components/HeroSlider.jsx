@@ -21,7 +21,7 @@ export default function HeroSlider({ slides = FALLBACK }) {
 
   useEffect(() => {
     if (paused || count < 2) return undefined;
-    timer.current = setInterval(() => go(1), 3000);
+    timer.current = setInterval(() => go(1), 2000);
     return () => clearInterval(timer.current);
   }, [paused, go, count]);
 

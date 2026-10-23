@@ -106,19 +106,30 @@
   background: rgba(30, 18, 24, 0.55); backdrop-filter: blur(4px);
 }
 
-/* ---------------- Marquee ---------------- */
+/* ---------------- Announcement ticker (pink bar) ---------------- */
+.announcement-bar {
+  width: 100%;
+  background: linear-gradient(90deg, #ff3b7d 0%, #b23a5e 50%, #ff3b7d 100%);
+  background-size: 200% 100%;
+  animation: announcement-gradient 8s linear infinite;
+}
 .marquee {
   overflow: hidden; white-space: nowrap;
-  background: var(--grad-rose); color: #fff;
-  padding: 15px 0; position: relative;
+  color: #fff;
+  padding: 12px 0; position: relative;
+  background: transparent;
 }
-.marquee-track { display: inline-flex; gap: 56px; animation: marquee 30s linear infinite; will-change: transform; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track { display: inline-flex; gap: 56px; animation: marquee 24s linear infinite; will-change: transform; }
+.announcement-bar:hover .marquee-track { animation-play-state: paused; }
 .marquee-group { display: inline-flex; gap: 56px; }
-.marquee-item { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.02rem; letter-spacing: 0.02em; color: #fff; transition: opacity 0.2s; }
-.marquee-item:hover { opacity: 0.82; }
-.marquee-item::after { content: '✦'; color: var(--gold); margin-left: 46px; }
+.marquee-item { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.98rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; transition: opacity 0.2s; }
+.marquee-item:hover { opacity: 0.9; }
+.marquee-item::after { content: '•'; color: rgba(255,255,255,0.9); margin-left: 46px; font-size: 1.2rem; line-height: 1; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes announcement-gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
 
 /* ---------------- Footer ---------------- */
 .footer { background: var(--ink); color: rgba(255, 255, 255, 0.74); margin-top: 40px; }

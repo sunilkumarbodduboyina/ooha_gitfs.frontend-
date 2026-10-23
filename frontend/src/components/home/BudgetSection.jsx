@@ -4,12 +4,10 @@ import { api, img } from '../../services/api';
 import { Reveal } from '../ui';
 
 const BUDGETS = [
-  { label: 'Small surprises', max: 299, text: 'Under ₹299' },
+  { label: 'Small surprises', max: 199, text: 'Under ₹199' },
   { label: 'Sweet gestures', max: 499, text: 'Under ₹499' },
   { label: 'Loved picks', max: 799, text: 'Under ₹799' },
   { label: 'Special gifts', max: 999, text: 'Under ₹999' },
-  { label: 'Premium', max: 1499, text: 'Under ₹1,499' },
-  { label: 'Luxury edit', max: 99999, text: 'Premium Gifts' },
 ];
 
 /* Real product images shipped with the project — shown until the live

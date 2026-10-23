@@ -91,8 +91,74 @@ export default function Home() {
         </section>
       )}
 
-      {/* Every category in the store + moment quick-links */}
+      {/* 1. Meaningful Gifts Starting … — “Every style, every kind of love.” */}
       {ready && <CategoryShowcase categories={data.categories || []} />}
+
+      {/* 2. Gifts Under … — “Thoughtful picks for every budget.” */}
+      <section className="section" style={{ background: 'var(--ink)', color: '#fff' }}>
+        <div className="container">
+          <div className="section-head center">
+            <div className="eyebrow" style={{ justifyContent: 'center', color: 'var(--gold)' }}>Gifts Under</div>
+            <h2 className="section-title" style={{ color: '#fff' }}>Gifts Under …</h2>
+            <p className="section-sub" style={{ color: 'rgba(255,255,255,0.7)' }}>Thoughtful picks for every budget.</p>
+          </div>
+          <BudgetSection />
+        </div>
+      </section>
+
+      {/* 3. Love ❤️ Lab — “Little things, unforgettable love.” */}
+      <LazySection>{ready && <LoveLab items={data.loveLab} />}</LazySection>
+
+      {/* 4. For Relationship — “A special gift for every special bond.” */}
+      <section className="section" style={{ background: 'linear-gradient(180deg, var(--blush) 0%, #fff 100%)' }}>
+        <div className="container">
+          <SectionHead
+            eyebrow="For Relationship"
+            title="For Relationship"
+            sub="A special gift for every special bond."
+            action={<Link to="/relationships" className="btn btn-outline btn-sm">View All <ArrowRight size={15} /></Link>}
+          />
+          {ready ? (
+            <RelationshipGrid items={cols.filter((c) => c.type === 'relationship').slice(0, 12)} />
+          ) : (
+            <div className="grid-4"><SkeletonGrid count={4} /></div>
+          )}
+        </div>
+      </section>
+
+      {/* 5. For Every Occasion — “Make every moment worth remembering.” */}
+      <section className="section">
+        <div className="container">
+          <SectionHead
+            eyebrow="For Every Occasion"
+            title="For Every Occasion"
+            sub="Make every moment worth remembering."
+            action={<Link to="/occasions" className="btn btn-outline btn-sm">View All <ArrowRight size={15} /></Link>}
+          />
+          {ready ? (
+            <OccasionGrid items={cols.filter((c) => c.type === 'occasion').slice(0, 9)} />
+          ) : (
+            <div className="grid-3"><SkeletonGrid count={3} /></div>
+          )}
+        </div>
+      </section>
+
+      {/* 6. Unique Collection — “Unexpected gifts. Unforgettable smiles.” */}
+      <section className="section">
+        <div className="container">
+          <SectionHead
+            eyebrow="Unique Collection"
+            title="Unique Collection"
+            sub="Unexpected gifts. Unforgettable smiles."
+            action={<Link to="/collection/new-arrivals" className="btn btn-outline btn-sm">View All <ArrowRight size={15} /></Link>}
+          />
+          {ready ? (
+            <CollectionStrip items={cols.filter((c) => c.type === 'collection')} />
+          ) : (
+            <div className="rail-wrap"><div className="rail"><SkeletonGrid count={3} /></div></div>
+          )}
+        </div>
+      </section>
 
       {/* Tabbed product explorer with a View All per category */}
       {ready && <CategoryExplorer categories={data.categories || []} />}
@@ -132,67 +198,6 @@ export default function Home() {
           <ProductRail eyebrow="Just landed" title="Recently Added" sub="Fresh off the studio bench." items={data.recentlyAdded} to="/collection/new-arrivals" />
         </>
       )}
-
-      {/* Budget buckets */}
-      <section className="section" style={{ background: 'var(--ink)', color: '#fff' }}>
-        <div className="container">
-          <div className="section-head center">
-            <div className="eyebrow" style={{ justifyContent: 'center', color: 'var(--gold)' }}>Every budget</div>
-            <h2 className="section-title" style={{ color: '#fff' }}>Gifts Under</h2>
-            <p className="section-sub" style={{ color: 'rgba(255,255,255,0.7)' }}>Thoughtful picks for every budget</p>
-          </div>
-          <BudgetSection />
-        </div>
-      </section>
-
-      {/* Curated collections */}
-      <section className="section">
-        <div className="container">
-          <SectionHead eyebrow="Handpicked edits" title="Gift Collections" sub="Stories, moods and moments grouped into collections you will love." />
-          {ready ? (
-            <CollectionStrip items={cols.filter((c) => c.type === 'collection')} />
-          ) : (
-            <div className="rail-wrap"><div className="rail"><SkeletonGrid count={3} /></div></div>
-          )}
-        </div>
-      </section>
-
-      {/* Love Lab */}
-      <LazySection>{ready && <LoveLab items={data.loveLab} />}</LazySection>
-
-      {/* Relationships */}
-      <section className="section" style={{ background: 'linear-gradient(180deg, var(--blush) 0%, #fff 100%)' }}>
-        <div className="container">
-          <SectionHead
-            eyebrow="Shop for someone special"
-            title="Gifts For Every Relationship"
-            sub="For her, for him, for the one who means everything."
-            action={<Link to="/relationships" className="btn btn-outline btn-sm">All relationships <ArrowRight size={15} /></Link>}
-          />
-          {ready ? (
-            <RelationshipGrid items={cols.filter((c) => c.type === 'relationship').slice(0, 12)} />
-          ) : (
-            <div className="grid-4"><SkeletonGrid count={4} /></div>
-          )}
-        </div>
-      </section>
-
-      {/* Occasions */}
-      <section className="section">
-        <div className="container">
-          <SectionHead
-            eyebrow="Celebrate it all"
-            title="Gifts For Every Occasion"
-            sub="Birthdays to farewells — a gift for every moment."
-            action={<Link to="/occasions" className="btn btn-outline btn-sm">All occasions <ArrowRight size={15} /></Link>}
-          />
-          {ready ? (
-            <OccasionGrid items={cols.filter((c) => c.type === 'occasion').slice(0, 9)} />
-          ) : (
-            <div className="grid-3"><SkeletonGrid count={3} /></div>
-          )}
-        </div>
-      </section>
 
       {/* Reviews */}
       <LazySection>{ready && <ReviewsSection items={data.reviews} />}</LazySection>
